@@ -1,0 +1,27 @@
+[package]
+name = "hackathon-shooter"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+authors = ["TuNiman1 <tunibendor@gmail.com>"]
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+
+[dependencies]
+anyhow = "1.0"
+bevy = "0.8"
+bevy_prototype_debug_lines = "0.8"
+bincode = "1.3"
+bitflags = "1.3"
+clap = { version = "4.0", features = ["derive"] }
+config = "0.13"
+humantime-serde = "1.1"
+log = "0.4"
+rand = "0.8"
+rand_pcg = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+
+[dev-dependencies]
+approx = "0.5"
