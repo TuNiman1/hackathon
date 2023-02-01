@@ -12,4 +12,4 @@
 ### Tech community
 
 - A cool cybersecurity & programming community open for everyone!
-[<https://discord.gg/9bkjfNkG>](https://discord.gg/KCYEYbA5)
+https://discord.gg/KCYEYbA5
