@@ -2,7 +2,7 @@
 
 ## created by TuNiman1
 
-### I created a simple shooting game in rust and the Bevy game engine & Amethyst game engine
+### I created a simple shooting game for the hackathon in rust and the Bevy game engine & Amethyst game engine
 
 - Simple zombie shooting game.
 - Tested on linux & windows.

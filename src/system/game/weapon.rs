@@ -4,8 +4,12 @@ use crate::component::ActorActions;
 use crate::component::Weapon;
 use crate::model::Position;
 use bevy::ecs::system::Query;
+use bevy::prelude::AssetServer;
+use bevy::prelude::Audio;
+use bevy::prelude::AudioSource;
 use bevy::prelude::Commands;
 use bevy::prelude::Entity;
+use bevy::prelude::Handle;
 use bevy::prelude::Res;
 use bevy::prelude::ResMut;
 use bevy::prelude::Time;
@@ -17,14 +21,16 @@ use std::f32::consts::FRAC_PI_2;
 const VELOCITY_DEVIATION_FACTOR: f32 = 0.1;
 const DIRECTION_DEVIATION: f32 = 0.02;
 const BARREL_LENGTH: f32 = 1.15; // TODO: don't hardcode
-
 pub fn weapon(
     mut query: Query<(Entity, &Actor, &Transform, &mut Weapon)>,
     mut commands: Commands,
     mut randomizer: ResMut<Pcg32>,
     time: Res<Time>,
+    asset_server: Res<AssetServer>,
+    audio: Res<Audio>,
 ) {
     let now = time.time_since_startup();
+    let shooting_sfx: Handle<AudioSource> = asset_server.load("sfx/shooting.ogg");
 
     for (entity, actor, transform, mut weapon) in query.iter_mut() {
         if actor.actions.contains(ActorActions::ATTACK) && weapon.fire(now) {
@@ -32,7 +38,7 @@ pub fn weapon(
             let (sin, cos) = (position.direction + FRAC_PI_2).sin_cos();
             position.x += BARREL_LENGTH * cos;
             position.y += BARREL_LENGTH * sin;
-
+            audio.play(shooting_sfx.clone());
             for _ in 0..8 {
                 position.direction = deviate_direction(&mut randomizer, position.direction);
 

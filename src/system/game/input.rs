@@ -18,4 +18,6 @@ pub fn input(
     if keyboard.just_pressed(KeyCode::Tab) {
         commands.add(CursorLock(false));
     }
+
+    if keyboard.just_pressed(KeyCode::O) {}
 }
